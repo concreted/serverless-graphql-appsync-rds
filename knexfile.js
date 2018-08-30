@@ -1,8 +1,9 @@
 const mysql = require('mysql');
+const pg = require('pg');
 
 module.exports = {
   production: {
-    client: 'mysql',
+    client: 'pg',
     connection: {
       host: process.env.DATABASE_URL_PRODUCTION,
       user: process.env.DATABASE_USER_PRODUCTION,
@@ -12,7 +13,7 @@ module.exports = {
     pool: { min: 0, max: 10 }
   },
   dev: {
-    client: 'mysql',
+    client: 'pg',
     connection: {
       host: process.env.DATABASE_URL_DEV,
       user: process.env.DATABASE_USER_DEV,

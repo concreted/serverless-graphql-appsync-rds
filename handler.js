@@ -7,9 +7,12 @@ const knexLib = require('knex');
 
 exports.graphqlHandler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  console.log('Received event {}', JSON.stringify(event, 3));
+  console.log('Received event: ', JSON.stringify(event, 3));
 
   const knex = knexLib(process.env.NODE_ENV === 'production' ? connection.production : connection.dev);
+
+  console.log("Connection info: ");
+  console.log(knex);
 
   try {
     let result;
@@ -21,7 +24,7 @@ exports.graphqlHandler = async (event, context) => {
         break;
       }
       case 'getAuthors': {
-        result = await getAuthors(knex, event.arguments);
+        result = getAuthors(knex, event.arguments);
         break;
       }
       case 'getPost': {
@@ -70,7 +73,9 @@ exports.graphqlHandler = async (event, context) => {
         throw `Unknown field, unable to resolve ${event.field}`;
       }
     }
-    return result;
+    console.log("result:");
+    console.log(result);
+    return await result;
   } catch (error) {
     console.log('Lambda error:', error);
     return Promise.reject(error);

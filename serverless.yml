@@ -6,13 +6,13 @@ provider:
   name: aws
   runtime: nodejs8.10
   stage: dev
-  region: xx-xxxx-x
+  region: us-west-2
   profile: default
   environment:
     NODE_ENV: ${self:provider.stage}
-    DATABASE_URL_DEV: xxxxxxxxxxxxx
-    DATABASE_USER_DEV: xxxxxxxxxxxxx
-    DATABASE_PASSWORD_DEV: xxxxxxxxxxxxx
+    DATABASE_URL_DEV: sls-appsync.cgevud4qzseh.us-west-2.rds.amazonaws.com
+    DATABASE_USER_DEV: mira
+    DATABASE_PASSWORD_DEV: q2VdSXAZ2DYWEr8y
     DATABASE_NAME_DEV: posts
 
 plugins:
@@ -21,7 +21,7 @@ plugins:
   - serverless-webpack
 
 custom:
-  accountId: xxxxxxxxxxxx
+  accountId: 761633760558
   webpackIncludeModules: true
   appSync:
     name:  ${self:service}-${self:provider.stage}
